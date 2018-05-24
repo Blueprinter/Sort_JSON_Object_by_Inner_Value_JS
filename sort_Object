@@ -1,0 +1,98 @@
+//This was posted on date 5-24-2018
+function sortObject(po) {
+  var arrOfValuesToSort,endDigit,i,k,L,lastDigitForThisSortChar,maptObjkt,obj,outerObj,sortedArr,sortKey,sortVal;
+  //First loop though the object to be sorted and put all of the elements into another object - the new object has 
+  //keys that are the sort values - The values to sort by are sorted - and then the sorted values are used to get
+  //each element of data associated with that sort value - This is how the data gets ordered
+  
+  //At the same time that the data is being put into another object and each sort value mapped to its element -
+  //create an array of the sort values
+
+  //If there is already a sort value that is identical - the add a new unique count digit to the end of the sort value
+
+  //Sort the array of sort values
+  
+  //Loop through the sorted array and get each element from the created object and put the data into a new array
+  
+  if (!po.sortKey) {//There is no parameter setting for the property key to sort by
+    error_Handling_Func(undefined, 'No Sort Key');
+    return;
+  }
+  
+  if (!po.data) {
+    error_Handling_Func(undefined, 'No Data');
+    return;
+  }
+  
+  obj = po.data;//The JSON object to be sorted
+  sortKey = po.sortKey;//The key name of the inner object to sort the object by
+  
+  maptObjkt = {};//A new object that maps the sort value to its' element
+  sortedArr = [];//The final result - an array with all the original data that orders each object element by the sort key
+  lastDigitForThisSortChar = {};//If the value to sort by has a duplicate then there must be a way to differentiate the identical values
+  arrOfValuesToSort = [];//All the values that need to be sorted - they are also the keys in the mapped object to get the data out in order
+
+  for (k in obj) {//Loop through every element of the original JSON object
+    //console.log('k: ' + k);
+    outerObj = obj[k];//Get the first level element - This does not hold the value to sort by
+    //console.log('outerObj: ' + JSON.stringify(outerObj));
+    
+    sortVal = outerObj[sortKey];//Get the characters to sort by - which is the value
+    //console.log('sortVal: ' + sortVal);
+
+    if (arrOfValuesToSort.indexOf(sortVal) !== -1) {//There is already an element for this key
+      endDigit = lastDigitForThisSortChar[sortVal];//Look for an integer that indicates the number of duplicate identical values
+      
+      if (!endDigit) {//There is no previous duplicate value - this is the first duplicate value found
+        endDigit = 0;
+      }
+      
+      endDigit++;//increment the value in order to append it to the value to sort - which is also the key name in the map
+      lastDigitForThisSortChar[sortVal] = endDigit;//save the new setting in case there is yet another duplicate value found
+      
+      sortVal = sortVal + endDigit.toString();//Create a custome sort value with an appended unique number
+    }
+    
+    maptObjkt[sortVal] = {};//Because the object has an inner level object an outer level object must be created to hold the inner object
+    
+    maptObjkt[sortVal][k] = obj[k];//put the inner object into the outer object
+    
+    arrOfValuesToSort.push(sortVal);//Add the value to sort to an array - these values are also the key names to the mapped data
+  }
+  
+
+  Logger.log('arrOfValuesToSort: ' + arrOfValuesToSort)
+  //Logger.log('maptObjkt: ' + JSON.stringify(maptObjkt))
+  
+  arrOfValuesToSort.sort();//Sort the 1 dimensional array of values - This allows the data to be retrieved in order
+  //Logger.log('arrOfValuesToSort: ' + arrOfValuesToSort)
+  
+  L = arrOfValuesToSort.length;//Get the number of elements in the array
+  
+  for (i=0;i<L;i++) {//Loop through the array of keys which are now in alpha order
+    sortedArr.push(maptObjkt[arrOfValuesToSort[i]]);//Put the original data into a new array in the order of the sorted values
+  }
+  
+  Logger.log(sortedArr)
+}
+
+function test_The_Sort_Func() {
+  var data,obj;
+  
+  data = {//This is example data to test the function and show that it works
+    'a':{'k1':'P','k2':'blue'},
+    'b':{'k1':'Aaa','k2':'red'},
+    'c':{'k1':'Z','k2':'green'},
+    'd':{'k1':'O','k2':'yellow'},
+    'e':{'k1':'BZyetf','k2':'brown'},
+    'f':{'k1':'BA','k2':'black'},
+    'g':{'k1':'BA','k2':'cyan'}
+  }
+  
+  obj = {};
+  
+  obj.sortKey = "k1";//The key name of the inner object to sort the object by
+  obj.data = data;
+  
+  sortObject(obj);//Call the function that sorts the data by an inner objects value
+}
