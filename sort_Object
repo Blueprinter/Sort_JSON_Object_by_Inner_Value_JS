@@ -61,11 +61,11 @@ function sortObject(po) {
   }
   
 
-  Logger.log('arrOfValuesToSort: ' + arrOfValuesToSort)
-  //Logger.log('maptObjkt: ' + JSON.stringify(maptObjkt))
+  //console.log('arrOfValuesToSort: ' + arrOfValuesToSort)
+  //console.log('maptObjkt: ' + JSON.stringify(maptObjkt))
   
   arrOfValuesToSort.sort();//Sort the 1 dimensional array of values - This allows the data to be retrieved in order
-  //Logger.log('arrOfValuesToSort: ' + arrOfValuesToSort)
+  //console.log('arrOfValuesToSort: ' + arrOfValuesToSort)
   
   L = arrOfValuesToSort.length;//Get the number of elements in the array
   
@@ -73,7 +73,7 @@ function sortObject(po) {
     sortedArr.push(maptObjkt[arrOfValuesToSort[i]]);//Put the original data into a new array in the order of the sorted values
   }
   
-  Logger.log(sortedArr)
+  console.log(sortedArr)
 }
 
 function test_The_Sort_Func() {
