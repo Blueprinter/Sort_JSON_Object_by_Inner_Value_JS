@@ -3,15 +3,15 @@ JavaScript - Sort an Object by an Inner Objects Value
 
 Example:
 
-  data = {//This is example data to test the function and show that it works
-    'a':{'k1':'P','k2':'blue'},
-    'b':{'k1':'Aaa','k2':'red'},
-    'c':{'k1':'Z','k2':'green'},
-    'd':{'k1':'O','k2':'yellow'},
-    'e':{'k1':'BZyetf','k2':'brown'},
-    'f':{'k1':'BA','k2':'black'},
-    'g':{'k1':'BA','k2':'cyan'}
-  }
+    data = {//This is example data to test the function and show that it works
+      'a':{'k1':'P','k2':'blue'},
+      'b':{'k1':'Aaa','k2':'red'},
+      'c':{'k1':'Z','k2':'green'},
+      'd':{'k1':'O','k2':'yellow'},
+      'e':{'k1':'BZyetf','k2':'brown'},
+      'f':{'k1':'BA','k2':'black'},
+      'g':{'k1':'BA','k2':'cyan'}
+    }
   
   The above JSON object has an inner object with multiple elements.  The keys to the inner object are named k1 and k2.  In the example code, the entire object is sorted by the inner objects values associated with key k1.
   
