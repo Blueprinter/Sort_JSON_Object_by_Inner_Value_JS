@@ -1,5 +1,7 @@
-# Sort_JSON_Object_by_Inner_Value_JS
+# Sort a 2D JSON Object by a value of the Inner Object using JavaScript
 JavaScript - Sort an Object by an Inner Objects Value
+
+The end result is an array of 2D objects in order by the sort key
 
 Example:
 
